@@ -1,0 +1,24 @@
+<main>
+  <form method='post' class='col-md-4'>
+    {{#if isLoggedIn}}
+      <p class='alert alert-success border-0'>You're logged in. Happy reading!</p>
+    {{else}}
+      <div class='mb-3'>
+        <label for='cardNum ' class='form-label fs-5'>Card Number</label>
+        <input
+          type='text'
+          name='cardNum'
+          id='cardNum'
+          class='form-control'
+          placeholder="Please use '1234' or '0000'"
+        />
+      </div>
+      <button
+        actionform='/login'
+        type='submit'
+        class='btn btn-primary'
+      >Login</button>
+    {{/if}}
+
+  </form>
+</main>

@@ -1,0 +1,34 @@
+<main>
+
+  <h2>Books in Library</h2>
+  <p class="text-secondary pt-3">Here is a list of books that are currently available:</p>
+  <div class="row row-cols-1 row-cols-md-4 g-4 py-4">
+    {{#each books}}
+        <div class="col">
+            <div class="card h-100">
+                <div class='card-body'>
+                    <img class='card-img-top mb-4' src='{{this.img}}' alt='{{this.title}}' />
+                    <h4 class='card-title fs-5'>{{this.title}}</h4>
+                    <p class='card-text'>By: {{this.author}}</p>
+                </div>
+                
+                <div class="card-footer py-3">
+                    {{#if this.isBorrowed}}
+                        <button class="btn btn-secondary" 
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus" 
+                                data-bs-title="Oops!" 
+                                data-bs-content="Unfortunately, this book is on loan!" 
+                                type='button'>On Loan
+                        </button>
+                    {{else}}
+                        <form class="m-0" action='/borrow/{{this._id}}' method="post">
+                            <button class="btn btn-success" type='submit'>Borrow</button>
+                        </form>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    {{/each}}
+
+</main>

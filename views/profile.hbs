@@ -1,0 +1,27 @@
+<main>
+  <h2>Your Profile</h2>
+  <p class='text-secondary'>Books your are borrowing:</p>
+  <div class='py-4'>
+    {{#each books}}
+      <div class='card mb-4'>
+        <div class='row card-body align-items-center'>
+          <div class='col-lg-2'>
+            <img
+              class='card-img-top rounded-0'
+              src='{{this.img}}'
+              alt='{{this.title}}'
+            />
+          </div>
+          <div class='col-lg-6 py-4'>
+            <h4 class='card-title fs-5'>{{this.title}}</h4>
+            <p class='card-text'>By: {{this.author}}</p>
+            <p>{{this.desc}}</p>
+            <form action='/return/{{this._id}}' method='POST' class='pt-3'>
+              <button type='submit' class='btn btn-warning'>Return</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</main>

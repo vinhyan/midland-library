@@ -1,0 +1,13 @@
+<main>
+  {{#if isLoggedIn}}
+    <form action='/logout' method='post'></form>
+  {{else}}
+    <p class='col-md-4 alert alert-danger border-0'>You are currently logged
+      out. Click
+      <a
+        href='/login'
+        class='link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'
+      >here</a>
+      to login</p>
+  {{/if}}
+</main>
