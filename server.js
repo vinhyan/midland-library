@@ -50,10 +50,18 @@ dotenv.config({ path: './config/keys.env' });
 
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_CONN_STRING, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect(process.env.MONGO_CONN_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Connected to MongoDB');
+    app.listen(HTTP_PORT, httpOnStart);
+  })
+  .catch((err) => {
+    console.log(`${err}... Unable to connect to MongoDB`);
+  });
 
 const Schema = mongoose.Schema;
 
@@ -325,4 +333,4 @@ const httpOnStart = () => {
   console.log(`Press Ctrl + C to quit.`);
 };
 
-app.listen(HTTP_PORT, httpOnStart);
+// app.listen(HTTP_PORT, httpOnStart);
