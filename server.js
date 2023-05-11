@@ -11,6 +11,10 @@ const HTTP_PORT = process.env.PORT || 8080;
 //======== ASSETS ========//
 app.use(express.static(path.join(__dirname, 'assets')));
 
+//======== DOTENV ========//
+const dotenv = require('dotenv');
+dotenv.config({ path: './config/keys.env' });
+
 //======== HANDLEBARS ========//
 const exphbs = require('express-handlebars');
 app.engine(
@@ -27,6 +31,9 @@ app.engine(
 app.set('view engine', '.hbs');
 app.use(express.urlencoded({ extend: true }));
 
+//======== CONNECT-MONGO ======== (persisting a session for Cyclic deployment)//
+const MongoStore = require('connect-mongo');
+
 //======== SESSION ========//
 const session = require('express-session');
 
@@ -35,14 +42,9 @@ app.use(
     secret: 'random string',
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_CONN_STRING }),
   })
 );
-
-//======== DOTENV ========//
-const dotenv = require('dotenv');
-dotenv.config({ path: './config/keys.env' });
-//======== BCRYPTJS ========//
-// const bcrypt = require('bcryptjs');
 
 //************************************************//
 //*                   DATABASE                   *//
